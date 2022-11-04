@@ -12,3 +12,25 @@ next.addEventListener("click", () => {
   counter++;
   carouselContainer.style.transform = "translateX(" + -size * counter + "px";
 });
+prev.addEventListener("click", () => {
+  if (counter <= 0) return;
+  carouselContainer.style.transition = "transform 0.4s ease-in-out";
+  counter--;
+  carouselContainer.style.transform = "translateX(" + -size * counter + "px";
+});
+carouselContainer.addEventListener("transitionend", () => {
+  console.log(slides[counter]);
+  if (slides[counter].id === "lastslide") {
+    carouselContainer.style.transition = "none";
+    counter = slides.length - 2;
+    carouselContainer.style.transform = "translateX(" + -size * counter + "px";
+  }
+});
+carouselContainer.addEventListener("transitionend", () => {
+  console.log(slides[counter]);
+  if (slides[counter].id === "firstslide") {
+    carouselContainer.style.transition = "none";
+    counter = slides.length - counter;
+    carouselContainer.style.transform = "translateX(" + -size * counter + "px";
+  }
+});
